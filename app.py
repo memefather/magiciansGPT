@@ -318,7 +318,7 @@ if prompt := st.chat_input("How can I help?"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
     elif prompt.find('think of a finger') != -1 or prompt.find('thinking of a finger') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
-            st.session_state.messages.append({"role": "system", "content": "The revealation the thumb})
+            st.session_state.messages.append({"role": "system", "content": "The revealation the thumb"})
         elif prompt[prompt.find('.') + 2] == 'N' or prompt[prompt.find('.') + 2] == 'n':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the index finger"})
         elif prompt[prompt.find('.') + 2] == 'M' or prompt[prompt.find('.') + 2] == 'm':
