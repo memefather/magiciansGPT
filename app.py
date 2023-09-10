@@ -278,7 +278,8 @@ stack = {
     "ace of heart" : "51st",
     "nine of diamond" : "52nd"
 }
-
+numbercode = {"T": 1, "N": 2, "M":3, "R":4, "L":5}
+fingercode = {"T": "Thumb👍", "N": "Index finger☝️", "M":"Middle finger🖕", "R":"Ring finger💍, "L":"Pinky"}
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -297,7 +298,7 @@ if "messages" not in st.session_state:
 #    st.session_state.messages[0]['content'] = "You are a chatbot on a stock statistic site. Your name is Jarvis. Please answer users questions using only the DATA provided and politely decline request to go outside provided info. \nDATA:" + str(infodic)
     
 if st.session_state.messages == []:
-    st.session_state.messages.append({"role":"system","content":"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater. You will look for keywords from the user which will determine the revelation to respond back to user. The first keyword is 'think of a'. the following word after that indicate the type of revelation to be have.})
+    st.session_state.messages.append({"role":"system","content":f"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will look for keywords from the user which will determine the revelation to respond back to user. The first keyword is 'think of a' or 'thinking of a'. The word immeidately after that indicates the type of revelation to be have. And the first character in the next sentence is the code to the revelation. The first type of revelation is 'number'. When this type of relvation is requested, here is the code to the number in a dictionary you can look up: {numbercode}. When answering the user, do not reveal right the way. Build some suspense and ask some unrelated questions to pretend you are reading mind first and then reveal in the next response after user answers your unrelated question. \nHere is an example conversation: \nUSER: 'Hello!' \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he will think of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think is is rather high right?' \nUSER: 'Maybe? You tell me!' \nASSISTANT: 'From the look of your eyes, I think it is a high number... maybe... higher than 3... AH! You are thinking of the number 5!'"})
     
 for message in st.session_state.messages[1:]:
     with st.chat_message(message["role"]):
