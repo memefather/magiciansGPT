@@ -328,7 +328,7 @@ if prompt := st.chat_input("How can I help?"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the ring finger"})
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
-        st.session_state.messages.append({"role": "system", "content": "The revealation the Queen of Hearts"})
+        st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
