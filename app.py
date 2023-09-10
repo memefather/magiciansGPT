@@ -305,7 +305,7 @@ for message in st.session_state.messages:
             st.markdown(message["content"])
 
 if prompt := st.chat_input("How can I help?"):
-    if prompt.find('think of a') != -1 or prompt.find('thinking of a') != -1:
+    if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the number 1"})
         elif prompt[prompt.find('.') + 2] == 'N' or prompt[prompt.find('.') + 2] == 'n':
@@ -316,6 +316,17 @@ if prompt := st.chat_input("How can I help?"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the number 4"})
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
+     elif prompt.find('think of a finger') != -1 or prompt.find('thinking of a finger') != -1:
+        if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
+            st.session_state.messages.append({"role": "system", "content": "The revealation the thumb})
+        elif prompt[prompt.find('.') + 2] == 'N' or prompt[prompt.find('.') + 2] == 'n':
+            st.session_state.messages.append({"role": "system", "content": "The revealation is the index finger"})
+        elif prompt[prompt.find('.') + 2] == 'M' or prompt[prompt.find('.') + 2] == 'm':
+            st.session_state.messages.append({"role": "system", "content": "The revealation is the middle finger"})
+        elif prompt[prompt.find('.') + 2] == 'R' or prompt[prompt.find('.') + 2] == 'r':
+            st.session_state.messages.append({"role": "system", "content": "The revealation is the ring finger"})
+        elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
+            st.session_state.messages.append({"role": "system", "content": "The revealation is the pinky"})
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
