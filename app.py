@@ -279,7 +279,7 @@ stack = {
     "nine of diamond" : "52nd"
 }
 numbercode = {"T": 1, "N": 2, "M":3, "R":4, "L":5}
-fingercode = {"T": "Thumb👍", "N": "Index finger☝️", "M":"Middle finger🖕", "R":"Ring finger💍, "L":"Pinky"}
+fingercode = {"T": "Thumb👍", "N": "Index finger☝️", "M":"Middle finger🖕", "R":"Ring finger💍", "L":"Pinky"}
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
