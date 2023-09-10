@@ -1,4 +1,3 @@
 streamlit
 openai
-stability_sdk
-langchain
+google_images_search
