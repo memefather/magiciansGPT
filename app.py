@@ -2,7 +2,6 @@
 import os
 import streamlit as st
 import openai
-import pandas as pd
 from google_images_search import GoogleImagesSearch
 from PIL import Image
 
