@@ -1,3 +1,4 @@
 streamlit
 openai
 langchain
+stability_sdk
