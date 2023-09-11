@@ -2,8 +2,10 @@
 import os
 import streamlit as st
 import openai
-from google_images_search import GoogleImagesSearch
-from PIL import Image
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain.memory import ConversationBufferMemory
 
 st.markdown(
     """
