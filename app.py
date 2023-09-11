@@ -347,27 +347,27 @@ if prompt := st.chat_input("Speak Mysteriously"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
-            if prompt[-1] == ".":
+            if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 6"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 1"})
         elif prompt[prompt.find('.') + 2] == 'N' or prompt[prompt.find('.') + 2] == 'n':
-            if prompt[-1] == ".":
+            if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 7"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 2"})
         elif prompt[prompt.find('.') + 2] == 'M' or prompt[prompt.find('.') + 2] == 'm':
-            if prompt[-1] == ".":
+            if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 8"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 3"})
         elif prompt[prompt.find('.') + 2] == 'R' or prompt[prompt.find('.') + 2] == 'r':
-            if prompt[-1] == ".":
+            if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 9"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 4"})
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
-            if prompt[-1] == ".":
+            if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 10"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
