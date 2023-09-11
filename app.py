@@ -390,8 +390,8 @@ if prompt := st.chat_input("Speak Mysteriously"):
         card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
         if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
 	        card = card[:-1]
-        st.session_state.messages.append({"role": "system", "assistant": get_story(card)[0]})
-        st.session_state.messages.append({"role": "system", "assistant": get_story(card)[1]})
+        st.session_state.messages.append({"role": "assistant", "content": get_story(card)[0]})
+        st.session_state.messages.append({"role": "assistant", "content": get_story(card)[1]})
     with st.chat_message("user"):
         st.markdown(prompt)
 
