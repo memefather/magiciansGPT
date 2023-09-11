@@ -284,7 +284,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # App framework
 st.title('🎩 MagiciansGPT 🎲')
-st.markdown("Your Friendly AI Psychic ✨")
+st.markdown("Your Friendly AI Psychic ✨ Say Hi 👋")
 
 #chatbot
 if "openai_model" not in st.session_state:
