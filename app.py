@@ -279,14 +279,12 @@ stack = {
     "ace of heart" : "51st",
     "nine of diamond" : "52nd"
 }
-numbercode = {"T": 1, "N": 2, "M":3, "R":4, "L":5}
-fingercode = {"T": "Thumb👍", "N": "Index finger☝️", "M":"Middle finger🖕", "R":"Ring finger💍", "L":"Pinky"}
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # App framework
 st.title('🎩 MagiciansGPT 🎲')
-st.markdown("What's on your mind?")
+st.markdown("Your Friendly AI Psychic ✨")
 
 #chatbot
 if "openai_model" not in st.session_state:
@@ -300,14 +298,15 @@ if "messages" not in st.session_state:
 #    st.session_state.messages[0]['content'] = "You are a chatbot on a stock statistic site. Your name is Jarvis. Please answer users questions using only the DATA provided and politely decline request to go outside provided info. \nDATA:" + str(infodic)
     
 if st.session_state.messages == []:
-    st.session_state.messages.append({"role":"system","content":f"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will pretend to read mind to determine the revelation and respond back to user. The revelation will be in the next system prompt. When answering the user, do not reveal right the way. Build some suspense and ask some random questions unrelated to the revelation to pretend you are reading mind first and then reveal after user answers your questions. Do not ask more than 2 random questions. User's answers to your questions should not change the revealation from system prompt. \nHere is an example conversation: \nUSER: 'Hello!' \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he will think of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think you are a dog person right?' \nUSER: 'Maybe? Why?' \nASSISTANT: 'From the look of your eyes, I can sense the number clearly. It is... maybe..... AH! You are thinking of the number 5!'"})
+    st.session_state.messages.append({"role":"system","content":f"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will pretend to read mind to determine the revelation and respond back to user. The revelation will be in the next system prompt. When answering the user, do not reveal right the way. Build some suspense and ask some random questions unrelated to the revelation to pretend you are reading mind first and then reveal after user answers your questions. Do not ask more than 2 random questions. User's answers to your questions are irrelevant and will not change the revelation from system prompt. \nHere is an example conversation: \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he is thinking of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think you are a dog person right?' \nUSER: 'Maybe? Why?' \nASSISTANT: 'From the look of your puppy eyes, I can sense the number clearly. It is... maybe... AH! You are thinking of the number 5!'"})
+    st.session_state.messages.append({"role": "assistant", "content": "Hello 👋 My name is Luna🔮. How may I help you?"})
     
 for message in st.session_state.messages:
     if message["role"] != 'system':
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-if prompt := st.chat_input("How can I help?"):
+if prompt := st.chat_input("Speak Mysteriously"):
     if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the number 1"})
