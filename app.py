@@ -280,6 +280,47 @@ stack = {
     "nine of diamond" : "52nd"
 }
 
+def get_story(cardselected):
+    cardselected = "queen of hearts"
+    number = stack[cardselected.lower()]
+    
+    # Prompt templates
+    title_template = PromptTemplate(
+        input_variables = ['topic'], 
+        template='write a book title for a novel which could contain this playing card in the book: {topic} but do not explicitly call out in the book title'
+    )
+    
+    story_template = PromptTemplate(
+        input_variables = ['topic','title','number'], 
+        template='with this book title: {title}, write a 150 words original story involving a playing card: {topic} and a address at {number} Street. Make sure there is no other addresses, playing cards, or numbers in the story. Make sure the card comes before the address in the story.'
+    )
+    
+    summary_template = PromptTemplate(
+        input_variables = ['story'], 
+        template='write image generation prompt for the main scene of the story STORY: {story}.'
+    )
+    
+    # Memory 
+    title_memory = ConversationBufferMemory(input_key='topic', memory_key='chat_history')
+    #script_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
+    story_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
+    summary_memory = ConversationBufferMemory(input_key='story', memory_key='chat_history')
+    
+    # Llms
+    llm = OpenAI(temperature=0.9) 
+    title_chain = LLMChain(llm=llm, prompt=title_template, verbose=True, output_key='title', memory=title_memory)
+    #script_chain = LLMChain(llm=llm, prompt=script_template, verbose=True, output_key='script', memory=script_memory)
+    story_chain = LLMChain(llm=llm, prompt=story_template, verbose=True, output_key='story', memory=story_memory)
+    summary_chain = LLMChain(llm=llm, prompt=summary_template, verbose=True, output_key='summary', memory=summary_memory)
+    
+    #Make a story
+    title = title_chain.run(cardselected)
+    story = story_chain.run(topic=cardselected, title=title, number=number)
+    summary = summary_chain.run(story=story)
+    
+    #image = stableai(str(summary))
+    return [title, story, summary]
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # App framework
@@ -292,11 +333,7 @@ if "openai_model" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-#elif st.session_state.messages[0]['content'].find(infodic['shortName']) == -1:
-#    st.session_state.messages = []
-#elif st.session_state.messages[0]['content'].find(infodic['shortName']) != -1:
-#    st.session_state.messages[0]['content'] = "You are a chatbot on a stock statistic site. Your name is Jarvis. Please answer users questions using only the DATA provided and politely decline request to go outside provided info. \nDATA:" + str(infodic)
-    
+  
 if st.session_state.messages == []:
     st.session_state.messages.append({"role":"system","content":"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will pretend to read mind to determine the revelation and respond back to user. The revelation will be in the next system prompt. When answering the user, do not reveal right the way. Build some suspense and ask some random questions unrelated to the revelation to pretend you are reading mind first and then reveal after user answers your questions. Do not ask more than 2 random questions. User's answers to your questions are irrelevant and will not change the revelation from system prompt. \nHere is an example conversation: \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he is thinking of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think you are a dog person right?' \nUSER: 'Maybe? Why?' \nASSISTANT: 'From the look of your puppy eyes, I can sense the number clearly. It is... maybe... AH! You are thinking of the number 5!'"})
     
@@ -306,17 +343,33 @@ for message in st.session_state.messages:
             st.markdown(message["content"])
 
 if prompt := st.chat_input("Speak Mysteriously"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
     if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
-            st.session_state.messages.append({"role": "system", "content": "The revealation is the number 1"})
+            if prompt[-1] == ".":
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 6"})
+            else:
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 1"})
         elif prompt[prompt.find('.') + 2] == 'N' or prompt[prompt.find('.') + 2] == 'n':
-            st.session_state.messages.append({"role": "system", "content": "The revealation is the number 2"})
+            if prompt[-1] == ".":
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 7"})
+            else:
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 2"})
         elif prompt[prompt.find('.') + 2] == 'M' or prompt[prompt.find('.') + 2] == 'm':
-            st.session_state.messages.append({"role": "system", "content": "The revealation is the number 3"})
+            if prompt[-1] == ".":
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 8"})
+            else:
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 3"})
         elif prompt[prompt.find('.') + 2] == 'R' or prompt[prompt.find('.') + 2] == 'r':
-            st.session_state.messages.append({"role": "system", "content": "The revealation is the number 4"})
+            if prompt[-1] == ".":
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 9"})
+            else:
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 4"})
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
-            st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
+            if prompt[-1] == ".":
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 10"})
+            else:
+                st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
     elif prompt.find('think of a finger') != -1 or prompt.find('thinking of a finger') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             st.session_state.messages.append({"role": "system", "content": "The revealation the thumb"})
@@ -330,7 +383,14 @@ if prompt := st.chat_input("Speak Mysteriously"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the pinky"})
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    elif prompt.find('a story') != -1:
+        st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. You become a story teller. Once story is delivered in the next assistant prompt, end the chat nicely with emoji and no longer communicate with user."})
+        listprompt = prompt.split()
+        card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
+        if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
+	        card = card[:-1]
+        st.session_state.messages.append({"role": "system", "assistant": get_story(card)[0]})
+        st.session_state.messages.append({"role": "system", "assistant": get_story(card)[1]})
     with st.chat_message("user"):
         st.markdown(prompt)
 
