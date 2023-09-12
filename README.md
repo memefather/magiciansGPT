@@ -56,9 +56,10 @@ R - Ring
 L - Pinky (little finger)  
 
 ## Card
-This module is recommanded after doing some of the previous modules because in this module, the magician will not need to prompt the GPT directly. The method is a force and the card being forced is the __9 of diamonds__.  
+This module is recommanded after doing some of the previous modules because in this module, the magician will not need to prompt the GPT directly. The method is a force and the card being forced is the __9 of Diamonds__. This is the bottom card in the Mnemonica stack so it is easy to get to.  
 Audience can prompt themselves with something like "I'm thinking of a card", the activation is "think of a card" or "thinking of a card".  
 Since this is a force, audience could prompt it first and then during the random question phase, magician forces a card to the audience before the GPT reveal. Some simple card forcing techniques are here: [Youtube](https://www.youtube.com/watch?v=sxP-tu10ulM)  
+This is very powerful because it dispels audience's theory that magician is prompting in codes since the magician never touched thier phone this time.  
 
 ## Card Story
 And lastly, this is the finale module and shall be used last. This is essentally asking the GPT to create a story utilizing the card information provided.
