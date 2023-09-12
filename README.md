@@ -63,7 +63,7 @@ Since this is a force, audience could prompt it first and then during the random
 ## Card Story
 And lastly, this is the finale module and shall be used last. This is essentally asking the GPT to create a story utilizing the card information provided.
 
-First, the card deck will need ot be in the Mnemonica order, a popular card stack by Juan Tamariz. Some details [here](https://ulearnmagic.com/mnemonica-stack-order-juan-tamariz/).  
+First, the card deck will need to be in the Mnemonica order, a popular card stack by Juan Tamariz. Some details [here](https://ulearnmagic.com/mnemonica-stack-order-juan-tamariz/).  
 Maigican can say something like "Imagine each of the 52 cards in the deck is like a person. And each card has a story just like each of us. Why don't you think of a card this time in your mind. Any card at all." While explaining this, casually do false shuffles and cuts on the card deck or with help of audience. Some simple false shuffle techniques are here: [Youtube](https://www.youtube.com/watch?v=PfbOELSTyP0) When done right, the card deck will remain in the same order.  
 At this point, magician will ask the audience to prompt anything with "story" in it along with the card they are thinking of but do not tell magician the card. Few examples like "Tell me a story with Ten of Spades" or "Write a story about Queen of hearts"  
 
