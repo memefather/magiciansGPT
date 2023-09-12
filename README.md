@@ -54,7 +54,7 @@ R - Ring
 L - Pinky  
 
 ## Card
-This module is recommanded after doing some of the previous modules because in module, the magician will not need to prompt the GPT directly. The method is a force and the card being force is the 9 of diamonds.  
+This module is recommanded after doing some of the previous modules because in module, the magician will not need to prompt the GPT directly. The method is a force and the card being forced is the __9 of diamonds__.  
 Audience can prompt themselves with something like "I'm thinking of a card", the activation is "think of a card" or "thinking of a card".  
 Since this is a force, audience could prompt it first and then during the random question phase, magician force a card to the audience before the GPT reveal. Some simple card forcing techniques are here: [Youtube](https://www.youtube.com/watch?v=sxP-tu10ulM)  
 
