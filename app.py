@@ -301,7 +301,7 @@ for message in st.session_state.messages:
 
 if prompt := st.chat_input("Speak Mysteriously"):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1:
+    if prompt.find('think of a number') != -1 or prompt.find('thinking of a number') != -1 or prompt.find('think of a dice roll') != -1 or prompt.find('thinking of a dice roll') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             if prompt[-1] == "." or prompt[-1] == "?":
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 6"})
