@@ -411,8 +411,14 @@ if prompt := st.chat_input("Speak Mysteriously"):
     with st.chat_message("assistant"):
         full_response = ""
         reply = ""
+        titlere = ""
         wrongre = ""
         if st.session_state.story == True:
+            title_placeholder = st.empty():
+            for letter in newtitle.split():
+                titlere += letter + " "
+                title_placeholder.markdown(titlere + "▌")
+            title_placeholder.markdown(titlere)
             story_placeholder = st.empty()
             for word in newstory.split():
                 reply += word + " "
