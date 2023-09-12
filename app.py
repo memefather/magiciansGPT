@@ -400,7 +400,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 output = newtitle + '\n' + newstory
                 st.session_state.messages.append({"role": "assistant", "content": output})
                 st.session_state.story = True
-                st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
+                #st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
             else:
                 st.session_state.wrongcard = True
         else:
@@ -411,16 +411,22 @@ if prompt := st.chat_input("Speak Mysteriously"):
     with st.chat_message("assistant"):
         full_response = ""
         reply = ""
+        wrongre = ""
         if st.session_state.story == True:
             story_placeholder = st.empty()
-            for word in output:
-                reply += word
+            for word in newstory.split():
+                reply += word + " "
                 story_placeholder.markdown(reply + "▌")
             story_placeholder.markdown(reply)
             st.session_state.story = False
         elif st.session_state.wrongcard == True:
-            st.session_state.messages.append({"role": "assistant", "content": "I don't think that card exists in the standard 52 card deck. Try again.🥺"})
-            st.markdown("I don't think that card exists in the standard 52 card deck. Try again.🥺")
+            wrongcard_placeholder = st.empty()
+            msg = "I don't think that card exists in the standard 52 card deck. Try again.🥺"
+            st.session_state.messages.append({"role": "assistant", "content": msg})
+            for w in msg.split():
+                wrongre += w + " "
+                wrongcard_placeholder.markdown(wrongre + "▌")
+            wrongcard_placeholder.markdown(msg)
             st.session_state.wrongcard = False
         else:
             message_placeholder = st.empty()
