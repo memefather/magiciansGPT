@@ -5,7 +5,7 @@ Can GPT read minds?🔮 Think again.✨
 The method is essentially a way of coding information to GPT via secret prompts in front of the audience.
 
 ## Here is an example performance:
-Magician: Have you guys heard of ChatGPT? It is basically this crazy smart AI from OpenAI that knows everything and all the tech companies are sprinting catch up. I thought to myself... if it is so powerful, maybe it can read human minds! Let's try an experiment shall we?  
+Magician: Have you guys heard of ChatGPT? It is this crazy smart AI from OpenAI that can pass medical and law school exams and knows everything and all the tech companies are sprinting catch up. I thought to myself... if it is so powerful, maybe it can read human minds! Let's try an experiment shall we?  
 Audience: Sure!  
 Magician: Can I borrow your phone and let's go to this link: [magiciansgpt.streamlit.app](https://magiciansgpt.streamlit.app/)  
 Audience: I see the page now. There is a chatbox.  
