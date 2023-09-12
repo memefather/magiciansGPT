@@ -418,10 +418,10 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 story_placeholder.markdown(reply + "▌")
             story_placeholder.markdown(reply)
             st.session_state.story = False
-        elif session_state.wrongcard == True:
+        elif st.session_state.wrongcard == True:
             st.session_state.messages.append({"role": "assistant", "content": "I don't think that card exists in the standard 52 card deck. Try again.🥺"})
             st.markdown("I don't think that card exists in the standard 52 card deck. Try again.🥺")
-            session_state.wrongcard = False
+            st.session_state.wrongcard = False
         else:
             message_placeholder = st.empty()
             for response in openai.ChatCompletion.create(model=st.session_state["openai_model"],messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],stream=True):
