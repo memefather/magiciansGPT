@@ -282,18 +282,17 @@ stack = {
 }
 
 def get_story(cardselected):
-    cardselected = "queen of hearts"
     number = stack[cardselected.lower()]
     
     # Prompt templates
     title_template = PromptTemplate(
         input_variables = ['topic'], 
-        template='write a book title for a novel which could contain this playing card in the book: {topic} but do not explicitly call out in the book title'
+        template='write a creative story title about this playing card: {topic}'
     )
     
     story_template = PromptTemplate(
         input_variables = ['topic','title','number'], 
-        template='with this book title: {title}, write a 150 words original story involving a playing card: {topic} and a address at {number} Street. Make sure there is no other addresses, playing cards, or numbers in the story. Make sure the card comes before the address in the story.'
+        template='with this book title: {title}, write a 100 words short story with emoji involving a playing card: {topic} and a address at {number} Street. Make sure there is no other addresses, playing cards, or numbers in the story.'
     )
     
     summary_template = PromptTemplate(
@@ -334,6 +333,9 @@ if "openai_model" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+if "story" not in st.session_state:
+    st.session_state.story = False
   
 if st.session_state.messages == []:
     st.session_state.messages.append({"role":"system","content":"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will pretend to read mind to determine the revelation and respond back to user. The revelation will be in the next system prompt. When answering the user, do not reveal right the way. Build some suspense and ask some random questions unrelated to the revelation to pretend you are reading mind first and then reveal after user answers your questions. Do not ask more than 2 random questions. User's answers to your questions are irrelevant and will not change the revelation from system prompt. \nHere is an example conversation: \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he is thinking of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think you are a dog person right?' \nUSER: 'Maybe? Why?' \nASSISTANT: 'From the look of your puppy eyes, I can sense the number clearly. It is... maybe... AH! You are thinking of the number 5!'"})
@@ -385,30 +387,37 @@ if prompt := st.chat_input("Speak Mysteriously"):
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     elif prompt.find('a story') != -1:
-        st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. You become a story teller. Once story is delivered in the next assistant prompt, end the chat nicely with emoji and no longer communicate with user."})
+        st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
         listprompt = prompt.split()
         card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
         if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
 	        card = card[:-1]
-        st.session_state.messages.append({"role": "assistant", "content": get_story(card)[0]})
-        st.session_state.messages.append({"role": "assistant", "content": get_story(card)[1]})
+        st.session_state.story = True
+	[newtitle, newstory, newsummary] = get_story(card)
+	st.session_state.messages.append({"role": "assistant", "content": newtitle})
+        st.session_state.messages.append({"role": "assistant", "content": newstory})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        for response in openai.ChatCompletion.create(
-            model=st.session_state["openai_model"],
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
-        ):
-            full_response += response.choices[0].delta.get("content", "")
-            message_placeholder.markdown(full_response + "▌")
-        message_placeholder.markdown(full_response)
+        if st.session_state.story == True:
+	    st.markdown(newtitle)
+	    st.markdown(newstory)
+	    st.session_state.story == False
+	else:
+	    message_placeholder = st.empty()
+	    full_response = ""
+	    for response in openai.ChatCompletion.create(
+		model=st.session_state["openai_model"],
+		messages=[
+		{"role": m["role"], "content": m["content"]}
+		for m in st.session_state.messages
+		],
+		stream=True,
+		):
+		full_response += response.choices[0].delta.get("content", "")
+		message_placeholder.markdown(full_response + "▌")
+	    message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
