@@ -402,9 +402,9 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 st.session_state.story = True
                 st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
             else:
-                session_state.wrongcard = True
+                st.session_state.wrongcard = True
         else:
-            session_state.wrongcard = True
+            st.session_state.wrongcard = True
     with st.chat_message("user"):
         st.markdown(prompt)
 
