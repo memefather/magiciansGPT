@@ -414,7 +414,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
         titlere = ""
         wrongre = ""
         if st.session_state.story == True:
-            title_placeholder = st.empty():
+            title_placeholder = st.empty()
             for letter in newtitle.split():
                 titlere += letter + " "
                 title_placeholder.markdown(titlere + "▌")
