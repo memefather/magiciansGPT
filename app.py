@@ -387,15 +387,14 @@ if prompt := st.chat_input("Speak Mysteriously"):
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     elif prompt.find('a story') != -1:
-	st.session_state.story = True
-	st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
-	listprompt = prompt.split()
+        st.session_state.story = True
+        st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
+        listprompt = prompt.split()
         card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
         if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
-	    card = card[:-1]
-	[newtitle, newstory, newsummary] = get_story(card)
-	st.session_state.messages.append({"role": "assistant", "content": newtitle})
-        st.session_state.messages.append({"role": "assistant", "content": newstory})
+            card = card[:-1]
+        [newtitle, newstory, newsummary] = get_story(card)
+        st.session_state.messages.append({"role": "assistant", "content": newtitle + '\n' + newstory})
     with st.chat_message("user"):
         st.markdown(prompt)
 
@@ -408,15 +407,15 @@ if prompt := st.chat_input("Speak Mysteriously"):
 	    message_placeholder = st.empty()
 	    full_response = ""
 	    for response in openai.ChatCompletion.create(
-		model=st.session_state["openai_model"],
-		messages=[
-		{"role": m["role"], "content": m["content"]}
-		for m in st.session_state.messages
-		],
-		stream=True,
-		):
-		full_response += response.choices[0].delta.get("content", "")
-		message_placeholder.markdown(full_response + "▌")
+		    model=st.session_state["openai_model"],
+		    messages=[
+		    {"role": m["role"], "content": m["content"]}
+		    for m in st.session_state.messages
+		    ],
+		    stream=True,
+		    ):
+		    full_response += response.choices[0].delta.get("content", "")
+		    message_placeholder.markdown(full_response + "▌")
 	    message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
