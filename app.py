@@ -425,6 +425,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
             st.session_state.messages.append({"role": "assistant", "content": msg})
             for w in msg.split():
                 wrongre += w + " "
+                time.sleep(0.05)
                 wrongcard_placeholder.markdown(wrongre + "▌")
             wrongcard_placeholder.markdown(msg)
             st.session_state.wrongcard = False
