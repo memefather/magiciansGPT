@@ -401,8 +401,8 @@ if prompt := st.chat_input("Speak Mysteriously"):
     with st.chat_message("assistant"):
         if st.session_state.story == True:
             st.markdown(newtitle)
-	        st.markdown(newstory)
-	        st.session_state.story == False
+            st.markdown(newstory)
+            st.session_state.story == False
         else:
             message_placeholder = st.empty()
     	    full_response = ""
