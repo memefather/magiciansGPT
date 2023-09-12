@@ -389,7 +389,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the pinky"})
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
-    elif prompt.find('a story') != -1:
+    elif prompt.find('story') != -1:
         listprompt = prompt.split()
         if "of" in listprompt:
             card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
@@ -417,11 +417,13 @@ if prompt := st.chat_input("Speak Mysteriously"):
             title_placeholder = st.empty()
             for letter in newtitle.split():
                 titlere += letter + " "
+                time.sleep(0.05)
                 title_placeholder.markdown(titlere + "▌")
             title_placeholder.markdown(titlere)
             story_placeholder = st.empty()
             for word in newstory.split():
                 reply += word + " "
+                time.sleep(0.05)
                 story_placeholder.markdown(reply + "▌")
             story_placeholder.markdown(reply)
             st.session_state.story = False
