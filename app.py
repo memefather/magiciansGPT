@@ -339,6 +339,9 @@ if "story" not in st.session_state:
 
 if "wrongcard" not in st.session_state:
     st.session_state.wrongcard = False
+
+if "wronginput" not in st.session_state:
+    st.session_state.wronginput = True
   
 if st.session_state.messages == []:
     st.session_state.messages.append({"role":"system","content":"You are magician's assistance on a mind reading magic trick. Your name is Luna🔮. You have a mysterious charater but friendly and speak with emoji. You will pretend to read mind to determine the revelation and respond back to user. The revelation will be in the next system prompt. When answering the user, do not reveal right the way. Build some suspense and ask some random questions unrelated to the revelation to pretend you are reading mind first and then reveal after user answers your questions. Do not ask more than 2 random questions. User's answers to your questions are irrelevant and will not change the revelation from system prompt. \nHere is an example conversation: \nASSISTANT: 'Hello 👋 My name is Luna🔮. How may I help you?' \nUSER: 'I'm with my friend Matt here and he is thinking of a number. Look into his mind and tell us what is he thinking of.' \nASSISTANT: 'Hmm... let me see... a number... I think you are a dog person right?' \nUSER: 'Maybe? Why?' \nASSISTANT: 'From the look of your puppy eyes, I can sense the number clearly. It is... maybe... AH! You are thinking of the number 5!'"})
@@ -376,6 +379,8 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 10"})
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
+        else:
+            st.session_state.wronginput == True
     elif prompt.find('think of a finger') != -1 or prompt.find('thinking of a finger') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             st.session_state.messages.append({"role": "system", "content": "The revealation the thumb"})
@@ -387,6 +392,8 @@ if prompt := st.chat_input("Speak Mysteriously"):
             st.session_state.messages.append({"role": "system", "content": "The revealation is the ring finger"})
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the pinky"})
+        else:
+            st.session_state.wronginput == True
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     elif prompt.find('story') != -1:
@@ -413,6 +420,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
         reply = ""
         titlere = ""
         wrongre = ""
+        wrongin = ""
         if st.session_state.story == True:
             title_placeholder = st.empty()
             for letter in newtitle.split():
@@ -437,6 +445,16 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 wrongcard_placeholder.markdown(wrongre + "▌")
             wrongcard_placeholder.markdown(msg)
             st.session_state.wrongcard = False
+        elif st.session_state.wronginput == True:
+            wronginput_placeholder = st.empty()
+            msgw = "I'm sorry my psychic energy just had a blip.😵‍💫 Could you say that again?🥺"
+            st.session_state.messages.append({"role": "assistant", "content": msgw})
+            for wi in msgw.split():
+                wrongin += wi + " "
+                time.sleep(0.05)
+                wronginput_placeholder.markdown(wrongin + "▌")
+            wronginput_placeholder.markdown(msgw)
+            st.session_state.wronginput = False
         else:
             message_placeholder = st.empty()
             for response in openai.ChatCompletion.create(model=st.session_state["openai_model"],messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],stream=True):
