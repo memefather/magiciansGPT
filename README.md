@@ -74,15 +74,15 @@ GPT: "The Ace of Diamonds Miracle"
 In the story generated, an address will be found along with the card. That will be the same position of the card named in the deck that has been seemingly shuffled and the most amazing part is that magician never knew the card until the story has been generated.
 
 ### Errors handling
-At rare cases where magician prompted incorrectly that is not following the framework, GPT will respond with:
-"I'm sorry my psychic energy just had a blip.😵‍💫 Could you say that again?🥺"
-"I don't think that card exists in the standard 52 card deck. Try again.🥺"
+At rare cases where magician prompted incorrectly that is not following the framework, GPT will respond with:  
+"I'm sorry my psychic energy just had a blip.😵‍💫 Could you say that again?🥺"  
+"I don't think that card exists in the standard 52 card deck. Try again.🥺"  
 This means invalid entry and please prompt correctly again.
 
 
 ### Credit
 Dan Harlan invented an easy version of coding numbers to magician's assistant in front of audience in his DVD - SpeakEasy back in 2011. This is a modernized version with GPT and extended to far beyond just numbers and added other methods of magic in the mix to create the ultimate "Magician's GPT"
 
-License from me is required to use this app in commerical applications or large performances. All rights reserved.
+***License from me is required to use this app in commerical applications or large performances/TV specials. All rights reserved. If you are also Magician+Dev combo, Let's collab!***
 
 
