@@ -1,7 +1,7 @@
 # MagiciansGPT
 Can GPT read minds? Think again.
 
-## MagiciansGPT is intended for making GPT a magician's assistant for predicting numbers, card, position of a card, dice roll, and more.
+## MagiciansGPT makes GPT magician's assistant for predicting numbers, card, position of a card, dice roll, and more.
 The method is essentially a way of coding information to GPT via prompts in front of the audience.
 
 ## Here is an example performance:
