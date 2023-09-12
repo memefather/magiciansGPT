@@ -287,7 +287,7 @@ def get_story(cardselected):
     # Prompt templates
     title_template = PromptTemplate(
         input_variables = ['topic'], 
-        template='write a creative story title about this playing card: {topic}'
+        template='write a original story title about this playing card: {topic} Do not include any other playing cards'
     )
     
     story_template = PromptTemplate(
@@ -394,17 +394,23 @@ if prompt := st.chat_input("Speak Mysteriously"):
         if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
             card = card[:-1]
         [newtitle, newstory, newsummary] = get_story(card)
-        st.session_state.messages.append({"role": "assistant", "content": newtitle + '\n' + newstory})
+        output = newtitle + '\n' + newstory
+        st.session_state.messages.append({"role": "assistant", "content": output})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
+        full_response = ""
+        reply = ""
         if st.session_state.story == True:
-            st.markdown(newtitle + '\n' + newstory)
-            st.session_state.story == False
+            story_placeholder = st.empty()
+            for word in output:
+                reply += word
+                story_placeholder.markdown(reply + "▌")
+            story_placeholder.markdown(reply)
+            st.session_state.story = False
         else:
             message_placeholder = st.empty()
-            full_response = ""
             for response in openai.ChatCompletion.create(model=st.session_state["openai_model"],messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],stream=True):
                 full_response += response.choices[0].delta.get("content", "")
                 message_placeholder.markdown(full_response + "▌")
