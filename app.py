@@ -400,8 +400,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
 
     with st.chat_message("assistant"):
         if st.session_state.story == True:
-            st.markdown(newtitle)
-            st.markdown(newstory)
+            st.markdown(newtitle + '\n' + newstory)
             st.session_state.story == False
         else:
             message_placeholder = st.empty()
@@ -410,7 +409,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
                 full_response += response.choices[0].delta.get("content", "")
                 message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
 
