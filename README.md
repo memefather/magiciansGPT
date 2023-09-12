@@ -1,5 +1,5 @@
-# MagiciansGPT
-Can GPT read minds? Think again.
+# 🎩 MagiciansGPT 🎲
+Can GPT read minds?🔮 Think again.✨
 
 ## MagiciansGPT makes GPT magician's assistant for predicting numbers, card, position of a card, dice roll, and more.
 The method is essentially a way of coding information to GPT via secret prompts in front of the audience.
