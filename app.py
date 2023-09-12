@@ -230,7 +230,7 @@ stack = {
 }
 
 def get_story(cardselected):
-    number = stack[cardselected.lower()]
+    number = stack[cardselected]
     
     # Prompt templates
     title_template = PromptTemplate(
@@ -243,31 +243,29 @@ def get_story(cardselected):
         template='with this book title: {title}, write a 100 words short story with emoji involving a playing card: {topic} and a address at {number} Street. Make sure there is no other addresses, playing cards, or numbers in the story.'
     )
     
-    summary_template = PromptTemplate(
+    #summary_template = PromptTemplate(
         input_variables = ['story'], 
         template='write image generation prompt for the main scene of the story STORY: {story}.'
     )
     
     # Memory 
     title_memory = ConversationBufferMemory(input_key='topic', memory_key='chat_history')
-    #script_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
     story_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
-    summary_memory = ConversationBufferMemory(input_key='story', memory_key='chat_history')
+    #summary_memory = ConversationBufferMemory(input_key='story', memory_key='chat_history')
     
     # Llms
     llm = OpenAI(temperature=0.9) 
     title_chain = LLMChain(llm=llm, prompt=title_template, verbose=True, output_key='title', memory=title_memory)
-    #script_chain = LLMChain(llm=llm, prompt=script_template, verbose=True, output_key='script', memory=script_memory)
     story_chain = LLMChain(llm=llm, prompt=story_template, verbose=True, output_key='story', memory=story_memory)
-    summary_chain = LLMChain(llm=llm, prompt=summary_template, verbose=True, output_key='summary', memory=summary_memory)
+    #summary_chain = LLMChain(llm=llm, prompt=summary_template, verbose=True, output_key='summary', memory=summary_memory)
     
     #Make a story
     title = title_chain.run(cardselected)
     story = story_chain.run(topic=cardselected, title=title, number=number)
-    summary = summary_chain.run(story=story)
+    #summary = summary_chain.run(story=story)
     
     #image = stableai(str(summary))
-    return [title, story, summary]
+    return [title, story]
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -352,9 +350,9 @@ if prompt := st.chat_input("Speak Mysteriously"):
         if "of" in listprompt:
             card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
             if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
-                card = card[:-1]
+                card = card[:-1].lower()
             if card in stack:
-                [newtitle, newstory, newsummary] = get_story(card)
+                [newtitle, newstory] = get_story(card)
                 output = newtitle + '\n' + newstory
                 st.session_state.messages.append({"role": "assistant", "content": output})
                 st.session_state.story = True
