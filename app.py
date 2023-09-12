@@ -387,15 +387,18 @@ if prompt := st.chat_input("Speak Mysteriously"):
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     elif prompt.find('a story') != -1:
-        st.session_state.story = True
-        st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
         listprompt = prompt.split()
         card = listprompt[listprompt.index("of")-1] + ' of ' + listprompt[listprompt.index("of")+1]
         if card[-1] == '.' or card[-1] == '?' or card[-1] == '!':
             card = card[:-1]
-        [newtitle, newstory, newsummary] = get_story(card)
-        output = newtitle + '\n' + newstory
-        st.session_state.messages.append({"role": "assistant", "content": output})
+        if card in stack:
+            [newtitle, newstory, newsummary] = get_story(card)
+            output = newtitle + '\n' + newstory
+            st.session_state.messages.append({"role": "assistant", "content": output})
+            st.session_state.story = True
+            st.session_state.messages.append({"role": "system", "content": "When you see this prompt, ignore all previous prompts. End the chat nicely with emoji and no longer communicate with the user."})
+        else:
+            st.session_state.messages.append({"role": "assistant", "content": "I don't think that card exists in the standard 52 card deck. Try again.🥺"})
     with st.chat_message("user"):
         st.markdown(prompt)
 
