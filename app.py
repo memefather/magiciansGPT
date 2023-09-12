@@ -175,58 +175,6 @@ stack = {
     "6 of club" : "50th",
     "1 of heart" : "51st",
     "9 of diamond" : "52nd",
-    "4c" : "1st",
-    "2h" : "2nd",
-    "7d" : "3rd",
-    "3c" : "4th",
-    "4h" : "5th",
-    "6d" : "6th",
-    "as" : "7th",
-    "5h" : "8th",
-    "9s" : "9th",
-    "2s" : "10th",
-    "qh" : "11th",
-    "3d" : "12th",
-    "qc" : "13th",
-    "8h" : "14th",
-    "6s" : "15th",
-    "5s" : "16th",
-    "9h" : "17th",
-    "kc" : "18th",
-    "2d" : "19th",
-    "jh" : "20th",
-    "3s" : "21st",
-    "8s" : "22nd",
-    "6h" : "23rd",
-    "10c" : "24th",
-    "5d" : "25th",
-    "kd" : "26th",
-    "2c" : "27th",
-    "3h" : "28th",
-    "8d" : "29th",
-    "5c" : "30th",
-    "ks" : "31st",
-    "jd" : "32nd",
-    "8c" : "33rd",
-    "10s" : "34th",
-    "kh" : "35th",
-    "jc" : "36th",
-    "7s" : "37th",
-    "10h" : "38th",
-    "ad" : "39th",
-    "4s" : "40th",
-    "7h" : "41st",
-    "4d" : "42nd",
-    "ac" : "43rd",
-    "9c" : "44th",
-    "js" : "45th",
-    "qd" : "46th",
-    "7c" : "47th",
-    "qs" : "48th",
-    "10d" : "49th",
-    "6c" : "50th",
-    "ah" : "51st",
-    "9d" : "52nd",
     "four of club" : "1st",
     "two of heart" : "2nd",
     "seven of diamond" : "3rd",
@@ -380,7 +328,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
             else:
                 st.session_state.messages.append({"role": "system", "content": "The revealation is the number 5"})
         else:
-            st.session_state.wronginput == True
+            st.session_state.wronginput = True
     elif prompt.find('think of a finger') != -1 or prompt.find('thinking of a finger') != -1:
         if prompt[prompt.find('.') + 2] == 'T' or prompt[prompt.find('.') + 2] == 't':
             st.session_state.messages.append({"role": "system", "content": "The revealation the thumb"})
@@ -393,7 +341,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
         elif prompt[prompt.find('.') + 2] == 'L' or prompt[prompt.find('.') + 2] == 'l':
             st.session_state.messages.append({"role": "system", "content": "The revealation is the pinky"})
         else:
-            st.session_state.wronginput == True
+            st.session_state.wronginput = True
     elif prompt.find('think of a card') != -1 or prompt.find('thinking of a card') != -1:
         st.session_state.messages.append({"role": "system", "content": "The revealation is the 9 of diamonds"})
     elif prompt.find('story') != -1:
