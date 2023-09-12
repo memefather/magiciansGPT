@@ -20,7 +20,7 @@ Audience enters "Yes!"
 GPT: Ah, I knew it! The great outdoors is your playground! 🌳 Now, let me unlock the secrets hidden within your mind and discover that number you've been thinking of. 🤔 I'm feeling quite confident about this... don't tell me just yet, let me concentrate... 🧘‍♀️ Your number is... drumroll... 0! Am I right? 🎉  
 Audience: What?! How does it know?  
 
-The process is **Prompt -> Audience answers questions from GPT -> Reveal**
+The process is **Prompt -> Audience answers questions from GPT -> Reveal**  
 The above example utilizes the "number" module. There are 5 modules MagiciansGPT as follows.
 
 ## Numbers
