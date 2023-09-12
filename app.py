@@ -420,7 +420,7 @@ if prompt := st.chat_input("Speak Mysteriously"):
             st.session_state.story = False
         elif session_state.wrongcard == True:
             st.session_state.messages.append({"role": "assistant", "content": "I don't think that card exists in the standard 52 card deck. Try again.🥺"})
-            st.markdown('I don't think that card exists in the standard 52 card deck. Try again.🥺')
+            st.markdown("I don't think that card exists in the standard 52 card deck. Try again.🥺")
             session_state.wrongcard = False
         else:
             message_placeholder = st.empty()
