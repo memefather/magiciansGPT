@@ -244,9 +244,9 @@ def get_story(cardselected):
     )
     
     #summary_template = PromptTemplate(
-        input_variables = ['story'], 
-        template='write image generation prompt for the main scene of the story STORY: {story}.'
-    )
+        #input_variables = ['story'], 
+        #template='write image generation prompt for the main scene of the story STORY: {story}.'
+    #)
     
     # Memory 
     title_memory = ConversationBufferMemory(input_key='topic', memory_key='chat_history')
